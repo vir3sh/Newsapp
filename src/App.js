@@ -12,26 +12,33 @@ export default class App extends Component {
         <Router>
           <Navbar />
           <Switch>
-            <Route path="/">
-              <News pagesize={5} category={"general"} />
+            <Route exact path="/">
+              <News key="sports" pagesize={6} category={"sports"} />
             </Route>
-            <Route path="/business">
-              <News pagesize={5} category={"business"} />
+            <Route exact path="/business">
+              <News key="business" pagesize={6} category={"business"} />
             </Route>
-            <Route path="/entertainment">
-              <News pagesize={5} category={"entertainment"} />
+            <Route exact path="/entertainment">
+              <News
+                key="entertainment"
+                pagesize={6}
+                category={"entertainment"}
+              />
             </Route>
-            <Route path="/health">
-              <News pagesize={5} category={"health"} />
+            <Route exact path="/health">
+              <News key="health" pagesize={6} category={"health"} />
             </Route>
-            <Route path="/science">
-              <News pagesize={5} category={"science"} />
+            <Route exact path="/general">
+              <News key="general" pagesize={6} category={"general"} />
             </Route>
-            <Route path="/sports">
-              <News pagesize={5} category={"sports"} />
+            <Route exact path="/science">
+              <News key="science" pagesize={6} category={"science"} />
             </Route>
-            <Route path="/technology">
-              <News pagesize={5} category={"technology"} />
+            <Route exact path="/sports">
+              <News key="sports" pagesize={6} category={"sports"} />
+            </Route>
+            <Route exact path="/technology">
+              <News key="technology" pagesize={6} category={"technology"} />
             </Route>
           </Switch>
         </Router>

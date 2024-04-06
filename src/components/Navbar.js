@@ -49,11 +49,11 @@ export class Navbar extends Component {
                   </Link>
                 </li>
 
-                <li className="nav-item">
+                {/* <li className="nav-item">
                   <Link className="nav-link" to="/entertainment">
                     Link
                   </Link>
-                </li>
+                </li> */}
 
                 <li className="nav-item">
                   <Link className="nav-link" to="/general">
@@ -65,13 +65,14 @@ export class Navbar extends Component {
                     health
                   </Link>
                 </li>
+
                 <li className="nav-item">
                   <Link className="nav-link" to="/science">
                     science
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/entertainment">
+                  <Link className="nav-link" to="/sports">
                     sports
                   </Link>
                 </li>
