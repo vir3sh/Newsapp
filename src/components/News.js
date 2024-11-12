@@ -150,8 +150,8 @@ const News = (props) => {
   useEffect(() => {
     const fetchNews = async () => {
       setLoading(true);
-     let url = `https://newsapi.org/v2/top-headlines?country=us&category=${props.category}&business&apiKey=d18aed7a18c04e329f5acafc72f415f2&page=${page}&pagesize=${props.pagesize}`;
-     let data = await fetch(url);
+      let url = `https://newsapi.org/v2/top-headlines?country=us&category=${props.category}&business&apiKey=${process.env.REACT_APP_NEWS_API_KEY}&page=${page}&pagesize=${props.pagesize}`;
+      let data = await fetch(url);
       let parseData = await data.json();
       setArticles(parseData.articles);
       setLoading(false);
