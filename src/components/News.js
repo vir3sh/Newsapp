@@ -136,35 +136,38 @@
 // };
 // export default News;
 
-
 import React, { useEffect, useState } from "react";
 import Newsitem from "./Newsitem";
 import Loading from "./Loading";
 import PropTypes from "prop-types";
+import newsData from "./newsData.json";
 
 const News = (props) => {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
+  const pageSize = props.pagesize || 8; // Set the page size from props, default to 8 if not provided
 
   useEffect(() => {
-    const fetchNews = async () => {
+    const loadNews = () => {
       setLoading(true);
-      let url = `https://newsapi.org/v2/top-headlines?country=us&category=${props.category}&business&apiKey=${process.env.REACT_APP_NEWS_API_KEY}&page=${page}&pagesize=${props.pagesize}`;
-      let data = await fetch(url);
-      let parseData = await data.json();
-      setArticles(parseData.articles);
+      // Calculate the start and end index for slicing the articles array
+      const start = (page - 1) * pageSize;
+      const end = start + pageSize;
+      setArticles(newsData.articles.slice(start, end)); // Slice the articles array based on the page and page size
       setLoading(false);
     };
-    fetchNews();
-  }, [props.category, page, props.pagesize]);
+    loadNews();
+  }, [page, pageSize]);
 
-  const previous = async () => {
-    setPage((prevPage) => prevPage - 1);
+  const previous = () => {
+    if (page > 1) {
+      setPage(page - 1);
+    }
   };
 
-  const next = async () => {
-    setPage((prevPage) => prevPage + 1);
+  const next = () => {
+    setPage(page + 1);
   };
 
   return (
@@ -190,15 +193,15 @@ const News = (props) => {
           <button
             disabled={page <= 1}
             type="button"
-            className="bnt btn-dark"
+            className="btn btn-dark"
             onClick={previous}
           >
             &larr; Previous
           </button>
           <button
-            disabled={page >= 3}
+            disabled={articles.length < pageSize} // Disable next button if there are less than pageSize articles
             type="button"
-            className="bnt btn-dark"
+            className="btn btn-dark"
             onClick={next}
           >
             Next &rarr;
